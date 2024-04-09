@@ -50,5 +50,39 @@ const UsuarioSchema = Schema(
   }
 );
 
+// funcion para encriptar la contraseña luego de que se almacene el usuario en la bd
+UsuarioSchema.pre("save", async function (next) {
+  const usuario = this;
+  if (!usuario.isModified("password")) return next();
+
+  const salt = await bcrypt.genSalt(10);
+  const hash = await bcrypt.hash(usuario.password, salt);
+  usuario.password = hash;
+});
+
+// funcion para encriptar la nueva contraseña luego de que se edite los datos de un usuario
+UsuarioSchema.pre("findOneAndUpdate", async function (next) {
+  const usuario = this._update;
+  if (usuario !== undefined && usuario.password) {
+    const salt = await bcrypt.genSalt(10);
+    const hash = await bcrypt.hash(usuario.password, salt);
+    usuario.password = hash;
+  } else {
+    next();
+  }
+
+  
+});
+
+// funcion que hace que no se muestre la contraseña en los datos de los usuarios
+UsuarioSchema.methods.toJSON = function () {
+  const { password, ...usuario } = this.toObject();
+  return usuario;
+};
+// funcion que compara contraseñas encriptadas
+UsuarioSchema.methods.comparePassword = async function (password) {
+  return await bcrypt.compare(password, this.password);
+};
+
 
 module.exports = model("Usuario", UsuarioSchema);
