@@ -1,0 +1,50 @@
+AUTH
+post - /api/auth/login
+    ruta para iniciar cesion
+
+post - /api/auth/crearCuenta
+    ruta para crear una cuenta
+
+USUARIOS
+get - /api/usuarios
+    devuelve todos los usuarios registrados
+
+get - /api/usuarios/usuario/:idUsuario
+    devuelve un usuario en especifico
+
+post - /api/usuarios/
+    registra un usuario
+
+put - /api/usuarios/:idUsuario
+    edita un usuario
+
+delete - /api/usuarios/:idUsuario
+    borra un usuario
+
+get - /api/usuarios/actual
+    devuelve los datos del usuario que tiene su sesion iniciada
+
+ENCUESTAS
+get - /api/encuestas
+    devuelve la lista de encuestas
+
+get - /api/encuestas/verEncuesta/:idEncuesta
+    devuelve una encuesta a traves de su id
+
+post - /api/encuestas/
+    crea una encuesta
+
+put - /api/encuestas/:idEncuesta
+    edita una encuesta a traves de su id
+
+delete - /api/encuestas/:idEncuesta
+    elimina una encuesta
+
+post - /api/encuestas/:idEncuesta/respuesta/
+    crea una respuesta a una encuesta
+
+get - /api/encuestas/:idEncuesta/resultado/
+    muestra los resultados de una encuesta
+
+post - /api/encuestas/encuestasRespondidas
+    muestra la lista de encuesta respondidas por un usuario
