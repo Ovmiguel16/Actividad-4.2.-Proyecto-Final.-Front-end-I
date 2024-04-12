@@ -1,0 +1,12 @@
+.logout {
+    background: #fff;
+    cursor: pointer;
+    padding: 4px 8px;
+    color: #145cd4;
+    transition: .4s ease all;
+}
+
+.logout:hover {
+    color: #fff;
+    background: #668ed4;
+}
